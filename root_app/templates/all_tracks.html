@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/Chalarangelo/mini.css/master/dist/mini-dark.css">
+{% endblock %}
+{% block content %}
+    <!--
+	{% for item in sorted_array%}
+	<p> {{ item }} </p>
+	{% endfor %}
+    -->
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.artist.label }}<br>
+            {{ form.artist(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

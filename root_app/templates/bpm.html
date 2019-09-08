@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/Chalarangelo/mini.css/master/dist/mini-dark.css">
+    <link rel="stylesheet" type="text/css" href="https://loading.io/css/loading.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'index.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{% endblock %}
+{% block content %}
+    <!--
+	{% for item in sorted_array%}
+	<p> {{ item }} </p>
+	{% endfor %}
+    -->
+    <form id = "bpm-form" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.bpm() }}<br>
+        </p>
+        <p id = "bpm_submit"> {{ form.submit() }}</p>
+    </form>
+    <div id = "loading-ring" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+<script>
+    $(document).ready(function(){
+        $("#bpm-form").on("submit", function(){
+            $("#loading-ring").show();
+        });//submit
+    });
+</script>
+{% endblock %}
+

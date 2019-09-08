@@ -1,0 +1,39 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Spotify#</title>
+        {% endif %}
+        <!--<link rel="stylesheet" href="https://gitcdn.link/repo/Chalarangelo/mini.css/master/dist/mini-dark.min.css"> -->
+        <!--<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">-->
+        <link rel="icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'index.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+        <script src="https://kit.fontawesome.com/d66392e131.js"></script>
+        <script src="{{ url_for('static', filename = 'script.js') }}"></script>
+        <!--<script type = "text/javascript" src = "{{ url_for('static', filename = 'index.js') }}"></script>-->
+
+    </head>
+    <body>
+        <div>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul id = "flashed_messages">
+            {% for category, message in messages %}
+            <li class = "{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}
+
+        {% endblock %}
+        <!-- Credits -->
+        <a href="https://codepen.io/ettrics"></a>
+    </body>
+</html>
