@@ -21,14 +21,6 @@ app.config['SECRET_KEY'] = SECRET_KEY
 app.config.broker_url = 'redis://localhost:6379/0'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
-SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
-SPOTIFY_API_BASE_URL = "https://api.spotify.com"
-API_VERSION = "v1"
-SPOTIFY_API_URL = "{}/{}".format(SPOTIFY_API_BASE_URL, API_VERSION)
-
-PORT = 5009
-
 if len(sys.argv) >= 2 and sys.argv[1] == "local":
     CLIENT_SIDE_URL = "http://0.0.0.0:" + str(PORT)
 else:
@@ -102,20 +94,6 @@ def cron():
     '''
     return "<h1></h1>"
 
-@app.route("/all_tracks_playlist/", methods = ['GET', 'POST'])
-def all_tracks_playlist():
-
-    form = AllTracksForm()
-
-    if form.validate_on_submit():
-
-        add_all(form.artist.data, request.args["token"])
-        flash("Successfully added all tracks by {}".format(form.artist.data))
-        flash("Check your playlists on Spotify :)")
-        return redirect(url_for('all_tracks_playlist', token = request.args["token"]))
-
-    return render_template('all_tracks.html', form = form)
-
 @app.route("/authorize")
 def authorize():
     '''
@@ -157,10 +135,6 @@ def callback():
     resp.set_cookie('token', access_token, expires=expire)
 
     return resp
-
-@app.route("/success")
-def success():
-    return render_template("success.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=PORT, threaded = True)
